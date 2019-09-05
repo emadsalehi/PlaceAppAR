@@ -16,4 +16,11 @@
     <string name="re_enter_password">ReEnter Password</string>
     <string name="register">Register</string>
     <string name="passwords_not_same">Passwords Are Not Same</string>
+    <string name="username_must_be_filled">Username Must Be Filled</string>
+    <string name="password_must_be_filled">Password Must Be Filled</string>
+    <string name="username_is_not_available">This Username Is Already Taken</string>
+    <string name="register_loading_bar_title">Creating Your Account!</string>
+    <string name="register_loading_bar_message">Please Wait, While We Are Checking Your Account Details</string>
+    <string name="account_created">Your Account Successfully Created</string>
+    <string name="network_error">Network Error, Please Try Again After Seconds...</string>
 </resources>

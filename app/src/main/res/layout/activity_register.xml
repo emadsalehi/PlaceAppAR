@@ -70,13 +70,14 @@
         android:layout_marginRight="50dp"
         android:background="@drawable/buttons"
         android:padding="17dp"
+        android:onClick="createAccountClicked"
         android:textAllCaps="false"
         android:textSize="18sp"
         android:text="@string/register"
         android:textColor="@android:color/white"/>
 
     <TextView
-        android:id="@+id/passwords_not_same"
+        android:id="@+id/register_error_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/passwords_not_same"

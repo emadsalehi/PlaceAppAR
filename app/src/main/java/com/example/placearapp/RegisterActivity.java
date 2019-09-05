@@ -63,12 +63,11 @@ public class RegisterActivity extends AppCompatActivity {
         loadingBar.setMessage("Please Wait, While We Are Checking Your Account Details");
         loadingBar.setCanceledOnTouchOutside(false);
         loadingBar.show();
-
-
+        validateUsername(username, password);
     }
 
     private void validateUsername(String username, String password) {
-        final DatabaseReference rootReference = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference rootReference = FirebaseDatabase.getInstance().getReference();
         rootReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -76,19 +75,21 @@ public class RegisterActivity extends AppCompatActivity {
                     HashMap<String, Object> userDataMap = new HashMap<>();
                     userDataMap.put("username", username);
                     userDataMap.put("password", password);
-
                     rootReference.child("Users").child(username).updateChildren(userDataMap)
-                            .addOnCompleteListener(task -> {
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(RegisterActivity.this, R.string.account_created, Toast.LENGTH_SHORT)
-                                            .show();
-                                    loadingBar.dismiss();
-                                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                                    startActivity(intent);
-                                } else {
-                                    Toast.makeText(RegisterActivity.this, R.string.account_created, Toast.LENGTH_SHORT)
-                                            .show();
-                                    loadingBar.dismiss();
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        loadingBar.dismiss();
+                                        Toast.makeText(RegisterActivity.this, R.string.account_created, Toast.LENGTH_SHORT)
+                                                .show();
+                                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                        startActivity(intent);
+                                    } else {
+                                        loadingBar.dismiss();
+                                        Toast.makeText(RegisterActivity.this, R.string.network_error, Toast.LENGTH_SHORT)
+                                                .show();
+                                    }
                                 }
                             });
                 } else {
