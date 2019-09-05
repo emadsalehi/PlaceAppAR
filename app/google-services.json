@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "539618883399",
+    "firebase_url": "https://place-ar-app.firebaseio.com",
+    "project_id": "place-ar-app",
+    "storage_bucket": "place-ar-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:539618883399:android:a1e645ed6be5a0b197fe62",
+        "android_client_info": {
+          "package_name": "com.example.placearapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "539618883399-sk2tdfss0bm6ji2vl2hdl95ps67kgcbi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.placearapp",
+            "certificate_hash": "cfd85b663f5241578aebc69a5eb1ade4f7b066e4"
+          }
+        },
+        {
+          "client_id": "539618883399-qa8k45p2f5rjepmi2g7aj5lhfe12m7td.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyT62GzH_UqdOhF6ebsH68OW5ZrKpmvJo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "539618883399-qa8k45p2f5rjepmi2g7aj5lhfe12m7td.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -5,4 +5,7 @@
     <string name="design_button">Designs</string>
     <string name="account_button">Account</string>
     <string name="delete_button">Delete</string>
+    <string name="welcome_text">Test On Your Place!</string>
+    <string name="have_account">Already Have Account? Login</string>
+    <string name="join_now">Join Now!</string>
 </resources>
