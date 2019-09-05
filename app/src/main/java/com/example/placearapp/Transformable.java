@@ -1,4 +1,4 @@
-package com.google.ar.sceneform.samples.hellosceneform;
+package com.example.placearapp;
 
 import com.google.ar.sceneform.ux.BaseTransformableNode;
 import com.google.ar.sceneform.ux.RotationController;
