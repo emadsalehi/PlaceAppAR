@@ -8,9 +8,12 @@
     <string name="welcome_text">Test On Your Place!</string>
     <string name="have_account">Already Have Account? Login</string>
     <string name="join_now">Join Now!</string>
-    <string name="phone_number_text">Phone Number</string>
+    <string name="username_text">Username</string>
     <string name="password_text">Password</string>
     <string name="remember_me_text">Remember me</string>
     <string name="forgot_password">Forgot Password</string>
     <string name="login">Login</string>
+    <string name="re_enter_password">ReEnter Password</string>
+    <string name="register">Register</string>
+    <string name="passwords_not_same">Passwords Are Not Same</string>
 </resources>
