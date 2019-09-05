@@ -8,4 +8,9 @@
     <string name="welcome_text">Test On Your Place!</string>
     <string name="have_account">Already Have Account? Login</string>
     <string name="join_now">Join Now!</string>
+    <string name="phone_number_text">Phone Number</string>
+    <string name="password_text">Password</string>
+    <string name="remember_me_text">Remember me</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="login">Login</string>
 </resources>
