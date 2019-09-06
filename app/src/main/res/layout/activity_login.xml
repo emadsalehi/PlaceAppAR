@@ -7,6 +7,19 @@
     tools:context=".LoginActivity"
     android:background="@drawable/login">
 
+    <TextView
+        android:id="@+id/login_error_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/passwords_not_same"
+        android:layout_above="@id/login_username_input"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="20dp"
+        android:visibility="invisible"/>
+
     <EditText
         android:id="@+id/login_username_input"
         android:layout_width="match_parent"
@@ -81,6 +94,7 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:background="@drawable/buttons"
+        android:onClick="loginButtonPressed"
         android:padding="17dp"
         android:textAllCaps="false"
         android:textSize="18sp"

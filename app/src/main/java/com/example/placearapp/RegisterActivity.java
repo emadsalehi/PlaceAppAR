@@ -40,7 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
         loadingBar = new ProgressDialog(this);
     }
 
-    public void createAccountClicked(View v) {
+    public void registerButtonPressed(View v) {
         String username = inputUsername.getText().toString();
         String password = inputPassword.getText().toString();
         String rePassword = inputRePassword.getText().toString();
@@ -60,7 +60,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
         registerErrorText.setVisibility(View.INVISIBLE);
         loadingBar.setTitle(R.string.register_loading_bar_title);
-        loadingBar.setMessage("Please Wait, While We Are Checking Your Account Details");
+        loadingBar.setMessage("Please Wait, While we are checking your account details");
         loadingBar.setCanceledOnTouchOutside(false);
         loadingBar.show();
         validateUsername(username, password);
@@ -76,20 +76,17 @@ public class RegisterActivity extends AppCompatActivity {
                     userDataMap.put("username", username);
                     userDataMap.put("password", password);
                     rootReference.child("Users").child(username).updateChildren(userDataMap)
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        loadingBar.dismiss();
-                                        Toast.makeText(RegisterActivity.this, R.string.account_created, Toast.LENGTH_SHORT)
-                                                .show();
-                                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                                        startActivity(intent);
-                                    } else {
-                                        loadingBar.dismiss();
-                                        Toast.makeText(RegisterActivity.this, R.string.network_error, Toast.LENGTH_SHORT)
-                                                .show();
-                                    }
+                            .addOnCompleteListener(task -> {
+                                if (task.isSuccessful()) {
+                                    loadingBar.dismiss();
+                                    Toast.makeText(RegisterActivity.this, R.string.account_created, Toast.LENGTH_SHORT)
+                                            .show();
+                                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                    startActivity(intent);
+                                } else {
+                                    loadingBar.dismiss();
+                                    Toast.makeText(RegisterActivity.this, R.string.username_not_exists, Toast.LENGTH_SHORT)
+                                            .show();
                                 }
                             });
                 } else {
