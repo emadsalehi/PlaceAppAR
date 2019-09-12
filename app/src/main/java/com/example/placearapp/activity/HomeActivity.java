@@ -1,4 +1,4 @@
-package com.example.placearapp;
+package com.example.placearapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +13,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.placearapp.R;
+import com.example.placearapp.Transformable;
 import com.google.ar.core.Anchor;
 import com.google.ar.core.HitResult;
 import com.google.ar.core.Plane;
