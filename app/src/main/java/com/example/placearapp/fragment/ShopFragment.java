@@ -28,7 +28,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShopActivity extends Fragment {
+public class ShopFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private ShopItemsAdapter adapter;
@@ -36,13 +36,16 @@ public class ShopActivity extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        albumList = new ArrayList<>();
+        adapter = new ShopItemsAdapter(getActivity(), albumList);
+        Log.i("in", "create");
         return inflater.inflate(R.layout.activity_shop, container, false);
     }
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
+        Log.i("in", "activity");
         super.onActivityCreated(savedInstanceState);
         super.onCreate(savedInstanceState);
-        ((AppCompatActivity)getActivity()).setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) getView().findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
@@ -50,8 +53,6 @@ public class ShopActivity extends Fragment {
 
         recyclerView = (RecyclerView) getView().findViewById(R.id.recycler_view);
 
-        albumList = new ArrayList<>();
-        adapter = new ShopItemsAdapter(getActivity(), albumList);
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 1);
         recyclerView.setLayoutManager(mLayoutManager);
