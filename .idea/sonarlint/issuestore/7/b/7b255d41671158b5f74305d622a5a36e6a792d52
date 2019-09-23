@@ -1,0 +1,19 @@
+
+8squid:S1643X"Use a StringBuilder instead.(«§Òıÿÿÿÿ
+?squid:S1148_"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+[squid:S2147`"DCombine this catch with the one at line 94, which has the same body.(ï­£Ä
+?squid:S1148a"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+˜squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ËĞƒ
+Usquid:S4719K"9Replace charset name argument with StandardCharsets.UTF_8(¢…Ÿèüÿÿÿÿ
+csquid:S11922"GDefine a constant instead of duplicating this literal "UTF-8" 11 times.(‹‘ƒÑûÿÿÿÿ
+T
+squid:S106:"9Replace this use of System.out or System.err by a logger.(Ÿìû‚øÿÿÿÿ
+?squid:S1148="#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+rsquid:S2068M"V'password' detected in this expression, review this potentially hard-coded credential.(Ò±ù°úÿÿÿÿ
+[squid:S2147>"DCombine this catch with the one at line 60, which has the same body.(ï­£Ä
+?squid:S1148?"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+Dsquid:S1185h"(Remove this method to simply inherit it.(Œÿµºøÿÿÿÿ
+O
+squid:S1069"9Replace this use of System.out or System.err by a logger.(½„²Â
+rsquid:S20684"V'password' detected in this expression, review this potentially hard-coded credential.(Ò±ù°úÿÿÿÿ
+Dsquid:S1185m"(Remove this method to simply inherit it.(¨ıÁüÿÿÿÿ

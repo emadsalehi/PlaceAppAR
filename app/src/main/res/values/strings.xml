@@ -18,6 +18,7 @@
     <string name="passwords_not_same">Passwords Are Not Same</string>
     <string name="username_must_be_filled">Username Must Be Filled</string>
     <string name="password_must_be_filled">Password Must Be Filled</string>
+    <string name="name_must_be_filled">Name Must Be Filled</string>
     <string name="username_is_not_available">This Username Is Already Taken</string>
     <string name="register_loading_bar_title">Creating Your Account!</string>
     <string name="login_loading_bar_title">Sending You In!</string>
@@ -26,4 +27,5 @@
     <string name="network_error">Network Error, Please Try Again After Seconds...</string>
     <string name="username_not_exists">This username do not exists</string>
     <string name="incorrect_password_or_username">Username or password is incorrect</string>
+    <string name="enter_name">Your Name</string>
 </resources>

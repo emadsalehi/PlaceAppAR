@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.placearapp.Handler.SessionHandler;
 import com.example.placearapp.R;
 import com.example.placearapp.Transformable;
 import com.google.ar.core.Anchor;
@@ -26,19 +28,21 @@ import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.ux.ArFragment;
 
 public class HomeActivity extends AppCompatActivity {
+
     private static final String TAG = HomeActivity.class.getSimpleName();
     private static final double MIN_OPENGL_VERSION = 3.0;
-
     private ArFragment arFragment;
     private ModelRenderable andyRenderable;
+    private SessionHandler session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (!checkIsSupportedDeviceOrFinish(this)) {
+        if (!checkIsSupportedDeviceOrFinish(this))
             return;
-        }
+
+        session = new SessionHandler(getApplicationContext());
 
         setContentView(R.layout.activity_ux);
         arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.ux_fragment);
@@ -92,14 +96,14 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * Returns false and displays an error message if Sceneform can not run, true if Sceneform can run
-     * on this device.
-     *
-     * <p>Sceneform requires Android N on the device as well as OpenGL 3.0 capabilities.
-     *
-     * <p>Finishes the activity if Sceneform can not run
-     */
+
+    public void onAccountButtonPressed(View v) {
+        session.logoutUser();
+        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(i);
+        finish();
+    }
+
     public static boolean checkIsSupportedDeviceOrFinish(final Activity activity) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
             Log.e(TAG, "Sceneform requires Android N or later");

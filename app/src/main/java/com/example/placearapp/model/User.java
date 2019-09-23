@@ -1,30 +1,33 @@
 package com.example.placearapp.model;
 
+import java.util.Date;
+
 public class User {
-    private String username, password;
+    private String username;
+    private String fullName;
+    private Date sessionExpiryDate;
 
-    public User() {
-
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public void setSessionExpiryDate(Date sessionExpiryDate) {
+        this.sessionExpiryDate = sessionExpiryDate;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public String getFullName() {
+        return fullName;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public Date getSessionExpiryDate() {
+        return sessionExpiryDate;
     }
 }

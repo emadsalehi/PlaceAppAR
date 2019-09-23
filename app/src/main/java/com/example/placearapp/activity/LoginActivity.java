@@ -1,6 +1,5 @@
 package com.example.placearapp.activity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
@@ -12,25 +11,35 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.placearapp.Handler.MySingleton;
+import com.example.placearapp.Handler.SessionHandler;
 import com.example.placearapp.R;
-import com.example.placearapp.model.User;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.example.placearapp.task.AccountTask;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private static final String KEY_STATUS = "status";
+    private static final String KEY_MESSAGE = "message";
+    private static final String KEY_FULL_NAME = "full_name";
+    private static final String KEY_USERNAME = "username";
+    private static final String KEY_PASSWORD = "password";
+    private static final String KEY_EMPTY = "";
     private EditText inputUsername, inputPassword;
     private TextView loginErrorText;
     private ProgressDialog loadingBar;
-    private String parentDBName = "Users";
+    private String loginUrl = "http://placeapp.000webhostapp.com/login.php";
+    private SessionHandler session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        session = new SessionHandler(getApplicationContext());
 
         inputUsername = findViewById(R.id.login_username_input);
         inputPassword = findViewById(R.id.login_password_input);
@@ -58,38 +67,53 @@ public class LoginActivity extends AppCompatActivity {
         loadingBar.setCanceledOnTouchOutside(false);
         loadingBar.show();
 
-        allowAccessAccount(username, password);
+        allowAccessAccountVolley(username, password);
     }
 
-    private void allowAccessAccount (String username, String password) {
-        DatabaseReference rootReference = FirebaseDatabase.getInstance().getReference();
-        rootReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child(parentDBName).child(username).exists()) {
-                    User userData = dataSnapshot.child(parentDBName).child(username).getValue(User.class);
+    private void allowAccessAccountVolley(String username, String password) {
+        JSONObject request = new JSONObject();
+        try {
+            request.put(KEY_USERNAME, username);
+            request.put(KEY_PASSWORD, password);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-                    if (userData.getPassword().equals(password) && userData.getUsername().equals(username)) {
-                        loadingBar.dismiss();
-                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                        startActivity(intent);
-                    } else {
-                        loadingBar.dismiss();
-                        Toast.makeText(LoginActivity.this, R.string.incorrect_password_or_username, Toast.LENGTH_SHORT)
-                                .show();
-                    }
-
-                } else {
+        JsonObjectRequest jsArrayRequest = new JsonObjectRequest
+                (Request.Method.POST, loginUrl, request, response -> {
                     loadingBar.dismiss();
-                    Toast.makeText(LoginActivity.this, R.string.network_error, Toast.LENGTH_SHORT)
-                            .show();
-                }
-            }
+                    try {
+                        if (response.getInt(KEY_STATUS) == 0) {
+                            session.loginUser(username,response.getString(KEY_FULL_NAME));
+                            loadHomeActivity();
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                        }else{
+                            Toast.makeText(getApplicationContext(),
+                                    response.getString(KEY_MESSAGE), Toast.LENGTH_SHORT).show();
 
-            }
-        });
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }, error -> {
+                    loadingBar.dismiss();
+                    Toast.makeText(getApplicationContext(),
+                            error.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+
+        MySingleton.getInstance(this).addToRequestQueue(jsArrayRequest);
+    }
+
+    private void loadHomeActivity() {
+        Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+        startActivity(i);
+        finish();
+    }
+
+
+    private void allowAccessAccount(String username, String password) {
+        AccountTask accountTask = new AccountTask(this);
+        accountTask.execute("login", username, password);
+        finish();
     }
 }
