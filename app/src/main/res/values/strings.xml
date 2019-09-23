@@ -28,4 +28,6 @@
     <string name="username_not_exists">This username do not exists</string>
     <string name="incorrect_password_or_username">Username or password is incorrect</string>
     <string name="enter_name">Your Name</string>
+    <string name="backdrop_title">HEE</string>
+    <string name="backdrop_subtitle">AGG</string>
 </resources>

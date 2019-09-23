@@ -1,6 +1,9 @@
 package com.example.placearapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -12,11 +15,13 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.placearapp.Handler.SessionHandler;
 import com.example.placearapp.R;
 import com.example.placearapp.Transformable;
+import com.example.placearapp.fragment.ShopFragment;
 import com.google.ar.core.Anchor;
 import com.google.ar.core.HitResult;
 import com.google.ar.core.Plane;
@@ -33,6 +38,7 @@ public class HomeActivity extends AppCompatActivity {
     private static final double MIN_OPENGL_VERSION = 3.0;
     private ArFragment arFragment;
     private ModelRenderable andyRenderable;
+    private Button shopButton;
     private SessionHandler session;
 
     @Override
@@ -79,6 +85,26 @@ public class HomeActivity extends AppCompatActivity {
                     andy.setRenderable(andyRenderable);
                     andy.select();
                 });
+        shopButton = findViewById(R.id.shop_button);
+        shopButton.setOnClickListener(view -> {
+            Fragment shopFragment = new ShopFragment();
+            replaceFragment(shopFragment);
+        });
+    }
+
+    public void replaceFragment(Fragment destFragment)
+    {
+        // First get FragmentManager object.
+        FragmentManager fragmentManager = this.getSupportFragmentManager();
+
+        // Begin Fragment transaction.
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        // Replace the layout holder with the required Fragment object.
+        fragmentTransaction.replace(R.id.hf, destFragment);
+
+        // Commit the Fragment replace action.
+        fragmentTransaction.commit();
     }
 
     public void onDeleteButtonPressed(View v) {
@@ -124,4 +150,6 @@ public class HomeActivity extends AppCompatActivity {
         }
         return true;
     }
+
+
 }
