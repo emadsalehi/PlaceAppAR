@@ -1,7 +1,5 @@
 package com.example.placearapp.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -30,13 +30,13 @@ public class RegisterActivity extends AppCompatActivity {
     private static final String KEY_FULL_NAME = "full_name";
     private static final String KEY_USERNAME = "username";
     private static final String KEY_PASSWORD = "password";
+    private static final String REGISTER_URL = "http://placeapp.000webhostapp.com/register.php";
     private EditText inputUsername;
     private EditText inputPassword;
     private EditText inputRePassword;
     private EditText inputName;
     private TextView registerErrorText;
     private ProgressDialog loadingBar;
-    private String registerUrl = "http://placeapp.000webhostapp.com/register.php";
     private SessionHandler session;
 
     @Override
@@ -95,7 +95,7 @@ public class RegisterActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         JsonObjectRequest jsArrayRequest = new JsonObjectRequest
-                (Request.Method.POST, registerUrl, request, response -> {
+                (Request.Method.POST, REGISTER_URL, request, response -> {
                     loadingBar.dismiss();
                     try {
                         if (response.getInt(KEY_STATUS) == 0) {
