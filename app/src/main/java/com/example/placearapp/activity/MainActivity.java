@@ -10,8 +10,8 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.placearapp.Handler.SessionHandler;
 import com.example.placearapp.R;
+import com.example.placearapp.handler.SessionHandler;
 
 public class MainActivity extends AppCompatActivity {
 

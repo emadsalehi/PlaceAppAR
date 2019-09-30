@@ -13,9 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.placearapp.Handler.MySingleton;
-import com.example.placearapp.Handler.SessionHandler;
 import com.example.placearapp.R;
+import com.example.placearapp.handler.MySingleton;
+import com.example.placearapp.handler.SessionHandler;
 import com.example.placearapp.task.AccountTask;
 
 import org.json.JSONException;

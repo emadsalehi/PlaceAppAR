@@ -53,3 +53,9 @@ sceneform.asset('sampledata/models/chair/chair.obj',
         'default',
         'sampledata/models/chair/chair.sfa',
         'src/main/assets/chair')
+
+
+sceneform.asset('sampledata/models/Andy/andy.obj',
+        'default',
+        'sampledata/models/Andy/andy.sfa',
+        'src/main/assets/andy')

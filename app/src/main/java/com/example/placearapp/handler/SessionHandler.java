@@ -1,4 +1,4 @@
-package com.example.placearapp.Handler;
+package com.example.placearapp.handler;
 
 import android.content.Context;
 import android.content.SharedPreferences;
