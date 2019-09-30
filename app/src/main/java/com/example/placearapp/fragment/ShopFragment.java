@@ -24,6 +24,7 @@ import com.example.placearapp.model.ShopItemsAdapter;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,18 +41,17 @@ public class ShopFragment extends Fragment {
         Log.i("in", "create");
         return inflater.inflate(R.layout.activity_shop, container, false);
     }
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         Log.i("in", "activity");
         super.onActivityCreated(savedInstanceState);
         super.onCreate(savedInstanceState);
-        Toolbar toolbar = getView().findViewById(R.id.toolbar);
-        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        Toolbar toolbar = (Toolbar) getView().findViewById(R.id.toolbar);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
         initCollapsingToolbar();
 
-        recyclerView = getView().findViewById(R.id.recycler_view);
+        recyclerView = (RecyclerView) getView().findViewById(R.id.recycler_view);
 
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 1);
@@ -75,9 +75,9 @@ public class ShopFragment extends Fragment {
      */
     private void initCollapsingToolbar() {
         final CollapsingToolbarLayout collapsingToolbar =
-                getView().findViewById(R.id.collapsing_toolbar);
+                (CollapsingToolbarLayout) getView().findViewById(R.id.collapsing_toolbar);
         collapsingToolbar.setTitle(" ");
-        AppBarLayout appBarLayout = getView().findViewById(R.id.appbar);
+        AppBarLayout appBarLayout = (AppBarLayout) getView().findViewById(R.id.appbar);
         appBarLayout.setExpanded(true);
 
         // hiding & showing the title when toolbar expanded & collapsed
@@ -152,14 +152,6 @@ public class ShopFragment extends Fragment {
     }
 
     /**
-     * Converting dp to pixel
-     */
-    private int dpToPx(int dp) {
-        Resources r = getResources();
-        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
-    }
-
-    /**
      * RecyclerView item decoration - give equal margin around grid item
      */
     public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
@@ -198,5 +190,13 @@ public class ShopFragment extends Fragment {
                 }
             }
         }
+    }
+
+    /**
+     * Converting dp to pixel
+     */
+    private int dpToPx(int dp) {
+        Resources r = getResources();
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
 }

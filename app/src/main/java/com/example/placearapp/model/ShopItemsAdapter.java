@@ -20,6 +20,18 @@ public class ShopItemsAdapter extends RecyclerView.Adapter<ShopItemsAdapter.MyVi
     public Context mContext;
     public List<ShopItem> shopItemList;
 
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        public TextView title, details;
+        public ImageView thumbnail;
+
+        public MyViewHolder(@NonNull View itemView) {
+            super(itemView);
+            title = (TextView) itemView.findViewById(R.id.title);
+            details = (TextView) itemView.findViewById(R.id.details);
+            thumbnail = (ImageView) itemView.findViewById(R.id.thumbnail);
+        }
+    }
+
     public ShopItemsAdapter(Context mContext, List<ShopItem> shopItemList) {
         this.mContext = mContext;
         this.shopItemList = shopItemList;
@@ -45,17 +57,5 @@ public class ShopItemsAdapter extends RecyclerView.Adapter<ShopItemsAdapter.MyVi
     @Override
     public int getItemCount() {
         return shopItemList.size();
-    }
-
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView title, details;
-        public ImageView thumbnail;
-
-        public MyViewHolder(@NonNull View itemView) {
-            super(itemView);
-            title = itemView.findViewById(R.id.title);
-            details = itemView.findViewById(R.id.details);
-            thumbnail = itemView.findViewById(R.id.thumbnail);
-        }
     }
 }
