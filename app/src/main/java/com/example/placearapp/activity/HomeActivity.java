@@ -55,7 +55,7 @@ public class HomeActivity extends AppCompatActivity {
 
     public static boolean checkIsSupportedDeviceOrFinish(final Activity activity) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-            Log.e(TAG, "SceneFrm requires Android N or later");
+            Log.e(TAG, "Sceneform requires Android N or later");
             Toast.makeText(activity, "SceneForm requires Android N or later", Toast.LENGTH_LONG).show();
             activity.finish();
             return false;
@@ -105,7 +105,22 @@ public class HomeActivity extends AppCompatActivity {
                     modelTransformable.setRenderable(modelRenderable);
                     modelTransformable.select();
                     nodes.add(arFragment.getTransformationSystem().getSelectedNode());
-                    addPreviewImage();
+
+                    ImageView preview = addPreviewImage();
+                    for (int i = 0; i < previewLinearLayout.getChildCount(); i++) {
+                        ImageView otherPreview = (ImageView) previewLinearLayout.getChildAt(i);
+                        otherPreview.setBackgroundResource(android.R.color.transparent);
+                    }
+                    preview.setBackgroundResource(R.drawable.preview_border);
+
+                    modelTransformable.setOnTapListener((hitTestResult, motionEvent1) -> {
+                        modelTransformable.select();
+                        for (int i = 0; i < previewLinearLayout.getChildCount(); i++) {
+                            ImageView otherPreview = (ImageView) previewLinearLayout.getChildAt(i);
+                            otherPreview.setBackgroundResource(android.R.color.transparent);
+                        }
+                        preview.setBackgroundResource(R.drawable.preview_border);
+                    });
                 });
 
         shopButton = findViewById(R.id.shop_button);
@@ -115,7 +130,7 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    private void addPreviewImage() {
+    private ImageView addPreviewImage() {
         ImageView preview = new ImageView(this);
         previewLinearLayout.addView(preview);
         preview.setAdjustViewBounds(true);
@@ -130,7 +145,13 @@ public class HomeActivity extends AppCompatActivity {
             int index = previewLinearLayout.indexOfChild(view);
             Node node = nodes.get(index);
             ((BaseTransformableNode) node).select();
+            for (int i = 0; i < previewLinearLayout.getChildCount(); i++) {
+                ImageView otherPreview = (ImageView) previewLinearLayout.getChildAt(i);
+                otherPreview.setBackgroundResource(android.R.color.transparent);
+            }
+            preview.setBackgroundResource(R.drawable.preview_border);
         });
+        return preview;
     }
 
     private void setModelRenderable(String id) {

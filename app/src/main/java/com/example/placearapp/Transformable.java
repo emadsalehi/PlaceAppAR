@@ -22,12 +22,10 @@ public class Transformable extends BaseTransformableNode {
 
     }
 
-    /** Returns the controller that translates this node using a drag gesture. */
     public TranslationController getTranslationController() {
         return translationController;
     }
 
-    /** Returns the controller that rotates this node using a twist gesture. */
     public RotationController getRotationController() {
         return rotationController;
     }
