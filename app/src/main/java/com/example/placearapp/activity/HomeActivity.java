@@ -24,7 +24,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.placearapp.R;
 import com.example.placearapp.Transformable;
-import com.example.placearapp.fragment.ShopFragment;
 import com.example.placearapp.fragment.ShopWebFragment;
 import com.example.placearapp.handler.SessionHandler;
 import com.google.ar.core.Anchor;
@@ -112,7 +111,7 @@ public class HomeActivity extends AppCompatActivity {
                         ImageView otherPreview = (ImageView) previewLinearLayout.getChildAt(i);
                         otherPreview.setBackgroundResource(android.R.color.transparent);
                     }
-                    preview.setBackgroundResource(R.drawable.input_designs);
+                    preview.setBackgroundResource(R.drawable.preview_border);
 
                     modelTransformable.setOnTapListener((hitTestResult, motionEvent1) -> {
                         modelTransformable.select();
@@ -120,7 +119,7 @@ public class HomeActivity extends AppCompatActivity {
                             ImageView otherPreview = (ImageView) previewLinearLayout.getChildAt(i);
                             otherPreview.setBackgroundResource(android.R.color.transparent);
                         }
-                        preview.setBackgroundResource(R.drawable.input_designs);
+                        preview.setBackgroundResource(R.drawable.preview_border);
                     });
                 });
 
@@ -150,7 +149,7 @@ public class HomeActivity extends AppCompatActivity {
                 ImageView otherPreview = (ImageView) previewLinearLayout.getChildAt(i);
                 otherPreview.setBackgroundResource(android.R.color.transparent);
             }
-            preview.setBackgroundResource(R.drawable.input_designs);
+            preview.setBackgroundResource(R.drawable.preview_border);
         });
         return preview;
     }
