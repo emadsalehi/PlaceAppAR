@@ -25,6 +25,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.placearapp.R;
 import com.example.placearapp.Transformable;
 import com.example.placearapp.fragment.ShopFragment;
+import com.example.placearapp.fragment.ShopWebFragment;
 import com.example.placearapp.handler.SessionHandler;
 import com.google.ar.core.Anchor;
 import com.google.ar.core.HitResult;
@@ -111,7 +112,7 @@ public class HomeActivity extends AppCompatActivity {
                         ImageView otherPreview = (ImageView) previewLinearLayout.getChildAt(i);
                         otherPreview.setBackgroundResource(android.R.color.transparent);
                     }
-                    preview.setBackgroundResource(R.drawable.preview_border);
+                    preview.setBackgroundResource(R.drawable.input_designs);
 
                     modelTransformable.setOnTapListener((hitTestResult, motionEvent1) -> {
                         modelTransformable.select();
@@ -119,13 +120,13 @@ public class HomeActivity extends AppCompatActivity {
                             ImageView otherPreview = (ImageView) previewLinearLayout.getChildAt(i);
                             otherPreview.setBackgroundResource(android.R.color.transparent);
                         }
-                        preview.setBackgroundResource(R.drawable.preview_border);
+                        preview.setBackgroundResource(R.drawable.input_designs);
                     });
                 });
 
         shopButton = findViewById(R.id.shop_button);
         shopButton.setOnClickListener(view -> {
-            Fragment shopFragment = new ShopFragment();
+            Fragment shopFragment = new ShopWebFragment();
             replaceFragment(shopFragment);
         });
     }
@@ -149,7 +150,7 @@ public class HomeActivity extends AppCompatActivity {
                 ImageView otherPreview = (ImageView) previewLinearLayout.getChildAt(i);
                 otherPreview.setBackgroundResource(android.R.color.transparent);
             }
-            preview.setBackgroundResource(R.drawable.preview_border);
+            preview.setBackgroundResource(R.drawable.input_designs);
         });
         return preview;
     }
@@ -201,6 +202,14 @@ public class HomeActivity extends AppCompatActivity {
 
     public void replaceFragment(Fragment destFragment) {
         // First get FragmentManager object.
+        if (destFragment instanceof ShopWebFragment) {
+
+            Button addModelButton = findViewById(R.id.add_model);
+            addModelButton.setEnabled(false);
+
+            Button deleteButton = findViewById(R.id.delete_button);
+            deleteButton.setEnabled(false);
+        }
         FragmentManager fragmentManager = this.getSupportFragmentManager();
 
         // Begin Fragment transaction.

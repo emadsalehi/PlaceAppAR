@@ -5,6 +5,7 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,11 @@ public class ShopFragment extends Fragment {
         albumList = new ArrayList<>();
         adapter = new ShopItemsAdapter(getActivity(), albumList);
         Log.i("in", "create");
-        return inflater.inflate(R.layout.activity_shop, container, false);
+        View view = inflater.inflate(R.layout.activity_shop, container, false);
+        view.setForegroundGravity(Gravity.BOTTOM);
+        return view;
+
+//        return inflater.inflate(R.layout.activity_shop, container, false);
     }
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -179,9 +184,9 @@ public class ShopFragment extends Fragment {
                 if (position < spanCount) { // top edge
                     outRect.top = spacing;
                 }
-                Log.i("outRect.top: ", String.valueOf(outRect.top));
+//                Log.i("outRect.top: ", String.valueOf(outRect.top));
                 outRect.bottom = spacing; // item bottom
-                Log.i("outRect.bottom: ", String.valueOf(outRect.bottom));
+//                Log.i("outRect.bottom: ", String.valueOf(outRect.bottom));
             } else {
                 outRect.left = column * spacing / spanCount; // column * ((1f / spanCount) * spacing)
                 outRect.right = spacing - (column + 1) * spacing / spanCount; // spacing - (column + 1) * ((1f /    spanCount) * spacing)
