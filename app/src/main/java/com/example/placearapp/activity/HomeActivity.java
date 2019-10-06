@@ -20,11 +20,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.example.placearapp.R;
 import com.example.placearapp.Transformable;
-import com.example.placearapp.fragment.ShopWebFragment;
 import com.example.placearapp.handler.SessionHandler;
 import com.google.ar.core.Anchor;
 import com.google.ar.core.HitResult;
@@ -44,6 +42,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private static final String TAG = HomeActivity.class.getSimpleName();
     private static final double MIN_OPENGL_VERSION = 3.0;
+    private FragmentManager fragmentManager;
     private ArFragment arFragment;
     private SessionHandler session;
     private ModelRenderable modelRenderable;
@@ -52,6 +51,7 @@ public class HomeActivity extends AppCompatActivity {
     private Button shopButton;
     private EditText modelNameText;
     private LinearLayout previewLinearLayout;
+    private Fragment shopFragment;
 
     public static boolean checkIsSupportedDeviceOrFinish(final Activity activity) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
@@ -86,7 +86,12 @@ public class HomeActivity extends AppCompatActivity {
         session = new SessionHandler(getApplicationContext());
         modelNameText = findViewById(R.id.model_name);
         previewLinearLayout = findViewById(R.id.preview_linear_layout);
-        arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.ux_fragment);
+        fragmentManager = getSupportFragmentManager();
+        shopFragment = fragmentManager.findFragmentById(R.id.shop_fragment);
+
+        arFragment = (ArFragment) fragmentManager.findFragmentById(R.id.ux_fragment);
+        fragmentManager.beginTransaction().show(fragmentManager.findFragmentById(R.id.ux_fragment))
+                .hide(fragmentManager.findFragmentById(R.id.shop_fragment)).commit();
 
         arFragment.setOnTapArPlaneListener(
                 (HitResult hitResult, Plane plane, MotionEvent motionEvent) -> {
@@ -125,8 +130,7 @@ public class HomeActivity extends AppCompatActivity {
 
         shopButton = findViewById(R.id.shop_button);
         shopButton.setOnClickListener(view -> {
-            Fragment shopFragment = new ShopWebFragment();
-            replaceFragment(shopFragment);
+            showShopFragment();
         });
     }
 
@@ -199,26 +203,31 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-    public void replaceFragment(Fragment destFragment) {
+    public void showShopFragment() {
         // First get FragmentManager object.
-        if (destFragment instanceof ShopWebFragment) {
+        Button addModelButton = findViewById(R.id.add_model);
+        addModelButton.setEnabled(false);
+        addModelButton.setVisibility(View.GONE);
 
-            Button addModelButton = findViewById(R.id.add_model);
-            addModelButton.setEnabled(false);
+        Button deleteButton = findViewById(R.id.delete_button);
+        deleteButton.setEnabled(false);
+        deleteButton.setVisibility(View.GONE);
 
-            Button deleteButton = findViewById(R.id.delete_button);
-            deleteButton.setEnabled(false);
-        }
-        FragmentManager fragmentManager = this.getSupportFragmentManager();
+        EditText editText = findViewById(R.id.model_name);
+        editText.setEnabled(false);
+        editText.setVisibility(View.GONE);
 
-        // Begin Fragment transaction.
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentManager.beginTransaction().show(shopFragment).commit();
+        fragmentManager.beginTransaction().hide(arFragment).commit();
 
-        // Replace the layout holder with the required Fragment object.
-        fragmentTransaction.replace(R.id.hf, destFragment);
-
-        // Commit the Fragment replace action.
-        fragmentTransaction.commit();
+//        // Begin Fragment transaction.
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//
+//        // Replace the layout holder with the required Fragment object.
+//        fragmentTransaction.replace(R.id.hf, destFragment);
+//
+//        // Commit the Fragment replace action.
+//        fragmentTransaction.commit();
     }
 
 
