@@ -1,14 +1,10 @@
 package com.example.placearapp.fragment;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +13,10 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.example.placearapp.R;
+import com.example.placearapp.activity.HomeActivity;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.ar.sceneform.ux.ArFragment;
 
 public class ShopWebFragment extends BottomSheetDialogFragment {
 
@@ -30,6 +28,21 @@ public class ShopWebFragment extends BottomSheetDialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_shop_web, container, false);
         mWebView = (WebView) view.findViewById(R.id.shop_webview);
+
+        mWebView.setOnKeyListener((v, keyCode, event) -> {
+            //This is the filter
+            if (event.getAction()!=KeyEvent.ACTION_DOWN)
+                return true;
+            if (keyCode == KeyEvent.KEYCODE_BACK) {
+                if (mWebView.canGoBack()) {
+                    mWebView.goBack();
+                } else {
+                    ((HomeActivity)getActivity()).onBackPressed();
+                }
+                return true;
+            }
+            return false;
+        });
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.getSettings().setDomStorageEnabled(true);
         mWebView.addJavascriptInterface(new WebAppInterface(getActivity()), "Android");
