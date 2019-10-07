@@ -217,8 +217,12 @@ public class HomeActivity extends AppCompatActivity {
         editText.setEnabled(false);
         editText.setVisibility(View.GONE);
 
-        fragmentManager.beginTransaction().show(shopFragment).commit();
-        fragmentManager.beginTransaction().hide(arFragment).commit();
+        fragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.in_from_left, R.anim.out_to_right)
+                .show(shopFragment).commit();
+        fragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.in_from_left, R.anim.out_to_right)
+                .hide(arFragment).commit();
 
 //        // Begin Fragment transaction.
 //        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -228,6 +232,21 @@ public class HomeActivity extends AppCompatActivity {
 //
 //        // Commit the Fragment replace action.
 //        fragmentTransaction.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!shopFragment.isHidden()) {
+            fragmentManager.beginTransaction().
+                    setCustomAnimations(R.anim.in_from_left, R.anim.out_to_right)
+                    .hide(shopFragment).commit();
+            fragmentManager.beginTransaction().
+                    setCustomAnimations(R.anim.in_from_left, R.anim.out_to_right)
+                    .show(arFragment).commit();
+        }
+        else {
+            super.onBackPressed();
+        }
     }
 
 
