@@ -27,7 +27,7 @@ public class ShopWebFragment extends BottomSheetDialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_shop_web, container, false);
-        mWebView = (WebView) view.findViewById(R.id.shop_webview);
+        mWebView = view.findViewById(R.id.shop_webview);
 
         mWebView.setOnKeyListener((v, keyCode, event) -> {
             //This is the filter
@@ -37,7 +37,7 @@ public class ShopWebFragment extends BottomSheetDialogFragment {
                 if (mWebView.canGoBack()) {
                     mWebView.goBack();
                 } else {
-                    ((HomeActivity)getActivity()).onBackPressed();
+                    getActivity().onBackPressed();
                 }
                 return true;
             }
@@ -83,8 +83,8 @@ public class ShopWebFragment extends BottomSheetDialogFragment {
          * Show a toast from the web page
          */
         @JavascriptInterface
-        public void addToAR(String pro_cat_id) {
-
+        public void addToAR(String productId) {
+            ((HomeActivity)getActivity()).setModelRenderable(productId);
         }
     }
 }
