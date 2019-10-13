@@ -45,7 +45,7 @@ public class ShopWebFragment extends BottomSheetDialogFragment {
                 if (mWebView.canGoBack()) {
                     mWebView.goBack();
                 } else {
-                    ((HomeActivity)getActivity()).onBackPressed();
+                    getActivity().onBackPressed();
                 }
                 return true;
             }

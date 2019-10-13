@@ -158,7 +158,7 @@ public class HomeActivity extends AppCompatActivity {
         return preview;
     }
 
-    private void setModelRenderable(String id) {
+    public void setModelRenderable(String id) {
         ModelRenderable.builder()
                 .setSource(this, getResources().getIdentifier(id, "raw", getPackageName()))
                 .build()
@@ -223,15 +223,6 @@ public class HomeActivity extends AppCompatActivity {
         fragmentManager.beginTransaction()
                 .setCustomAnimations(R.anim.in_from_left, R.anim.out_to_right)
                 .hide(arFragment).commit();
-
-//        // Begin Fragment transaction.
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//
-//        // Replace the layout holder with the required Fragment object.
-//        fragmentTransaction.replace(R.id.hf, destFragment);
-//
-//        // Commit the Fragment replace action.
-//        fragmentTransaction.commit();
     }
 
     public void productSelected(String product_id) {
@@ -271,6 +262,4 @@ public class HomeActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
-
-
 }
