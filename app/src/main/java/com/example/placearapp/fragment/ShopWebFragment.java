@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 
 import com.example.placearapp.R;
 import com.example.placearapp.activity.HomeActivity;
@@ -21,12 +22,19 @@ import com.google.ar.sceneform.ux.ArFragment;
 public class ShopWebFragment extends BottomSheetDialogFragment {
 
     WebView mWebView;
+    Button mButton;
     private BottomSheetBehavior<View> mBottomSheetBehavior;
     private BottomSheetBehavior.BottomSheetCallback mBottomSheetBehaviorCallback;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_shop_web, container, false);
+        mButton = view.findViewById(R.id.adder_button);
+        mButton.setOnClickListener(view1 -> {
+            HomeActivity homeActivity = (HomeActivity) getActivity();
+            homeActivity.productSelected("lavan");
+        });
+
         mWebView = (WebView) view.findViewById(R.id.shop_webview);
 
         mWebView.setOnKeyListener((v, keyCode, event) -> {
@@ -50,6 +58,7 @@ public class ShopWebFragment extends BottomSheetDialogFragment {
         mWebView.loadUrl("http://geereh.com/");
         return view;
     }
+
 
     @Override
     public void setupDialog(Dialog dialog, int style) {
@@ -84,7 +93,8 @@ public class ShopWebFragment extends BottomSheetDialogFragment {
          */
         @JavascriptInterface
         public void addToAR(String pro_cat_id) {
-
+            HomeActivity homeActivity = (HomeActivity) getActivity();
+            homeActivity.productSelected(pro_cat_id);
         }
     }
 }

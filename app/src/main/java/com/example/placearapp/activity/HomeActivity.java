@@ -234,14 +234,37 @@ public class HomeActivity extends AppCompatActivity {
 //        fragmentTransaction.commit();
     }
 
+    public void productSelected(String product_id) {
+        Button addModelButton = findViewById(R.id.add_model);
+        addModelButton.setEnabled(true);
+        addModelButton.post(() -> addModelButton.setVisibility(View.VISIBLE));
+
+        Button deleteButton = findViewById(R.id.delete_button);
+        deleteButton.setEnabled(true);
+        deleteButton.post(() -> deleteButton.setVisibility(View.VISIBLE));
+
+        EditText editText = findViewById(R.id.model_name);
+        editText.setEnabled(true);
+        editText.post(() -> editText.setVisibility(View.VISIBLE));
+
+        fragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.in_from_right, R.anim.out_to_left)
+                .show(arFragment).commit();
+        fragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.in_from_right, R.anim.out_to_left)
+                .hide(shopFragment).commit();
+        setModelRenderable("chair");
+
+    }
+
     @Override
     public void onBackPressed() {
         if (!shopFragment.isHidden()) {
-            fragmentManager.beginTransaction().
-                    setCustomAnimations(R.anim.in_from_left, R.anim.out_to_right)
+            fragmentManager.beginTransaction()
+                    .setCustomAnimations(R.anim.in_from_right, R.anim.out_to_left)
                     .hide(shopFragment).commit();
             fragmentManager.beginTransaction().
-                    setCustomAnimations(R.anim.in_from_left, R.anim.out_to_right)
+                    setCustomAnimations(R.anim.in_from_right, R.anim.out_to_left)
                     .show(arFragment).commit();
         }
         else {
