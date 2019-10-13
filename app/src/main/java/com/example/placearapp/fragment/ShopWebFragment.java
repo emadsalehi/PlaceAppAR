@@ -29,11 +29,11 @@ public class ShopWebFragment extends BottomSheetDialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_shop_web, container, false);
-        mButton = view.findViewById(R.id.adder_button);
-        mButton.setOnClickListener(view1 -> {
-            HomeActivity homeActivity = (HomeActivity) getActivity();
-            homeActivity.productSelected("lavan");
-        });
+//        mButton = view.findViewById(R.id.adder_button);
+//        mButton.setOnClickListener(view1 -> {
+//            HomeActivity homeActivity = (HomeActivity) getActivity();
+//            homeActivity.productSelected("lavan");
+//        });
 
         mWebView = (WebView) view.findViewById(R.id.shop_webview);
 
