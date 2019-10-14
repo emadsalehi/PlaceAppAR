@@ -244,7 +244,7 @@ public class HomeActivity extends AppCompatActivity {
         fragmentManager.beginTransaction()
                 .setCustomAnimations(R.anim.in_from_right, R.anim.out_to_left)
                 .hide(shopFragment).commit();
-        setModelRenderable("chair");
+        this.runOnUiThread(() -> setModelRenderable("andy"));
 
     }
 
